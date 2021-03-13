@@ -1,0 +1,55 @@
+clc
+clear
+
+x = @(t) 10*(sin(2*pi*t + 10))
+%do the sampling
+Freq=10;
+SampFreq = 200;  %% sample frequency
+cycles= 2;       %% cycles to display of the analog signal
+bit=3;
+Fs= 10/SampFreq;  %%cycles/sample
+%%get the xmin and xmax
+q=0:0.000001: (1/Freq)*cycles;  %% analog signal x-axis values
+a= 0: SampFreq*cycles/Freq;  %% discrete time signal x-axis values
+val= 0: (1/Freq)*cycles/(size(a,2)-1):(1/Freq)*cycles;  %% del T
+V=interp1(q,x(q),val); %% amplitudes of samples
+subplot(3,1,1), plot(q, x(q));
+h=refline(0);
+h.Color = 'k';
+xlabel('Analog Signal');
+
+
+Mn=min(x(q));
+Mx=max(x(q));
+
+ylvl=Mn:(Mx-Mn)/(2^bit-1):Mx;
+
+%quantization
+ylvl=Mn:(Mx-Mn)/(2^bit-1):Mx;
+
+for j=1:size(V,2)  %Quantiztion, compare and shift
+    for i=1:2^bit
+        if V(j)<=ylvl(i)
+            p=ylvl(i)-V(j);
+            if p<=(Mx-Mn)/((2^bit-1)*2)
+                V(j)= ylvl(i);
+                break;
+            else
+                V(j)=ylvl(i-1);
+                break;
+            end
+        end
+    end
+end
+subplot(3,1,2), stairs(a,V);
+xlabel(strcat('Quantized Signal (', int2str(SampFreq), 'Hz Sampling Frequency)__', int2str(bit),'bit uniform quantizer' ));
+er = 
+subplot(3,1,3), plot(q,interp1(val,V,q));
+h=refline(0);
+h.Color = 'k';
+
+%%get the labels
+%check with the all level values-which quantized value i want to assign
+
+SQNR = 1.76 + 6*bit
+display(SQNR)
