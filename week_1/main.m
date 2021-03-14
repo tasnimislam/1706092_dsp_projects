@@ -4,7 +4,6 @@ close all
 %%load the signal
 t = 0:0.001:0.1;
 signal = sin(2*pi*20*t);
-signal = 2*(signal - mean(signal)) ./ range(signal) ;
 
 %%plot the original signal
 figure("Name", "original");
@@ -42,6 +41,13 @@ restore= loose_bit_twos(encod)
 figure("Name", "restore")
 plot(t, restore)
 
+%%signal shift restore
+restore_shift = signal_shift_encod(N, signal, bit, y_quantized)
+
+%%encod shift
+encod_loose = encod_bin_shift(encoded_n)
+figure("Name", "stairs_encoded_x")
+stairs(1: length(signal), bin2dec(x))
 
 
 
