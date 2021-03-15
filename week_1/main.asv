@@ -22,14 +22,13 @@ stem(stem_sig);
 title("sampled signal")
 
 %u_law_compressor
-u = 255
-sampled_com = u_law_compressor(stem_sig, u)
+sampled_com = u_law_compressor(stem_sig)
 figure("Name", "u_law_compressed");
 stem(sampled_com)
 title("u law compressed")
 
 %quantized
-bit = 8;
+bit = ;
 y_quantized = quantize(stem_sig,bit);
 figure("Name", "quantized");
 stem(y_quantized);

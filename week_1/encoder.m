@@ -7,4 +7,5 @@ for l=1:length(y_quantized)
 end
 figure("Name", "stairs_encoded")
 stairs(1: length(y_sampled), encoded_signal)
+title("encoded signal")
 encoded_n=dec2bin(encoded_signal)
