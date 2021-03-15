@@ -1,1 +1,1 @@
-failing to get the signal back after encoding, help needed!
+Still can not figure out the right way to encode
