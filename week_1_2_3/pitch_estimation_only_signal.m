@@ -1,7 +1,7 @@
 clc
 clear all
 close all
-WAV_FILE_PATH = "1_10 dataset/three.wav"
+WAV_FILE_PATH = "1_10 dataset/one.wav"
 name = split(WAV_FILE_PATH, "/")
 name = split(name(2), ".")
 
@@ -12,8 +12,8 @@ name = split(name(2), ".")
 % title(sprintf("original signal: %s", name(1)))
 
 %%correlation for a particular part only
-x_begin = 10000
-x_end = 13000
+x_begin = 4720
+x_end = 18270
 signal = signal(x_begin:x_end)
 r = xcorr(signal)
 % figure("Name", "correlation for a particular part only")
@@ -22,7 +22,7 @@ r = xcorr(signal)
 
 %%Input power
 Px=sum(signal.^2)/length(signal);
-SNR = -10
+SNR = 0
 Py = Px/10^(SNR/10)
 
 %%generate white noise
@@ -39,6 +39,6 @@ subplot(511), plot(signal), title(sprintf("original signal: %s", name(1)))
 subplot(512), plot(r), title(sprintf("correlation befor noise: %d to %d for signal name: %s", x_begin, x_end, name(1)))
 subplot(513), plot(n), title("noise")
 subplot(514),plot(ACF_x), title("ACF of signal wrt time")
-subplot(515),plot(ACF_y), title("ACF of noisy signal wrt time")
+subplot(515),plot(ACF_y), title(sprintf("ACF of noisy signal wrt time SNR:%d", SNR))
 
 
