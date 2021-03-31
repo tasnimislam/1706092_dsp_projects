@@ -1,8 +1,0 @@
-%%signals
-t1 = 0.1:0.001:0.5
-t2 = 2:0.003:2.5
-conv_matlab = conv(sin(2*pi*t1), sin(2*pi*t2))
-conv_manami = conv_manami(sin(2*pi*t1), sin(2*pi*t2))
-
-figure()
-subplot(211); plot
